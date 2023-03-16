@@ -261,7 +261,7 @@ Publisher events go in this place
    * @param {number} state - The state of the manga.
    */
   async UpdateState(idmanga: MangaDomainBase): Promise<MangaDomainBase> {
-    if (this.orderService && this.StateModifiedEventPublisher) {
+    if (this.MangaService && this.StateModifiedEventPublisher) {
       const result = await this.MangaService.UpdateState(idmanga);
 
       this.StateModifiedEventPublisher.response = result;
