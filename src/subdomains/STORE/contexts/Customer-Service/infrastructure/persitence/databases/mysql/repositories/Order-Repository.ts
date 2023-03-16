@@ -21,7 +21,8 @@ export class OrderRepository
     }
 
      async   create(entity: OrderEntityDb): Promise<OrderEntityDb> {
-     return this.repository.create(entity)    }
+      console.log(entity)
+     return this.repository.save(entity)    }
 
    async  update(orderId: string, newOrder: OrderEntityDb): Promise<OrderEntityDb> {
         const Order = await this.repository.findOneBy({ orderId });

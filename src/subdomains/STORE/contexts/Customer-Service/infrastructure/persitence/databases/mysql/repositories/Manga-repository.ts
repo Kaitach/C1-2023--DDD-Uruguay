@@ -24,6 +24,7 @@ export class MangaRepository
      return this.repository.save(entity)    }
 
   async update(Mangaid: string, newManga: MangaEntityDb): Promise<MangaEntityDb> {
+    console.log(Mangaid)
         const Manga = await this.repository.findOneBy({ Mangaid });
         if (Manga) {
           const newEntity = {

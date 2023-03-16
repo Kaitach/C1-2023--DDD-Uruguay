@@ -1,13 +1,15 @@
 import { ValueObjectErrorHandler, IUseCase, ValueObjectException } from "src/libs";
 import { OrderAgregate } from "../../../../domain/aggregates";
 import { OrderDomainEntityBase } from "../../../../domain/entities";
-import { OrderAddEventPublisher } from "../../../../domain/events/publishers/order";
+import { ClientObtainedEventPublisher, OrderAddEventPublisher } from "../../../../domain/events/publishers/order";
 import { IRegisterOrder } from "../../../../domain/interfaces/commands/Order-commands/register.order-command";
 import { RegisterdOrderResponse } from "../../../../domain/interfaces/responses/Order-Response";
 import { IorderDomainService } from "../../../../domain/services";
 import { IdOrdertValueObject } from "../../../../domain/value-objects";
+import { IGetClientCommand } from "../../../../infrastructure/utils/commands/order/IGet-Client-Command";
 import { GetClientCaseUse } from "../get-client-case-use";
 import { GetMangaCaseUse } from "../get-manga-case-use";
+import { MangaObtainedEventPublisher } from '../../../../domain/events/publishers/order/manga-obtained-event-publisher';
 
 export class RegisterOrderCaseUse<
     Command extends IRegisterOrder = IRegisterOrder,
@@ -19,19 +21,30 @@ export class RegisterOrderCaseUse<
 {
 
     private readonly OrderAgregate: OrderAgregate;
-    private readonly GetClientCaseUse: GetClientCaseUse
-    private readonly GetMangaCaseUse: GetMangaCaseUse
+ 
+
+  
 
     constructor(
         
         private readonly orderService: IorderDomainService,
-        private readonly RegisterOrderEventPublisher: OrderAddEventPublisher,      
+        private readonly RegisterOrderEventPublisher: OrderAddEventPublisher,  
+        private readonly GetClientEventPublisher: ClientObtainedEventPublisher,
+        private readonly GetMangaEventPublisher:MangaObtainedEventPublisher
+
+           
     ) {
         super();
+        
         this.OrderAgregate = new OrderAgregate({
             orderService,
-            RegisterOrderEventPublisher
+            RegisterOrderEventPublisher, 
+            GetClientEventPublisher,
+            GetMangaEventPublisher
+            
         })
+
+       
     }
 
     async execute(command?: Command): Promise<Response> {
@@ -44,7 +57,6 @@ export class RegisterOrderCaseUse<
         command: Command
     ): Promise<OrderDomainEntityBase | null> {
         const entity = this.createEntityClientDomain(command);
-        this.validateValueObject((await entity));
 
         return this.exectueOrderAggregateRoot((await entity))
     }
@@ -52,32 +64,17 @@ export class RegisterOrderCaseUse<
 
     
     
-    private validateValueObject(
-        valueObject: OrderDomainEntityBase
-    ): void {
-       
-        const {
-            orderId
-        } = valueObject
-
-        if (orderId instanceof  IdOrdertValueObject && orderId.hasErrors())
-            this.setErrors(orderId.getErrors());
-         
-        if (this.hasErrors() === true)
-            throw new ValueObjectException(
-                'Hay algunos errores en el comando ejecutado para agregar order',
-                this.getErrors(),
-            );
-
-    }
+ 
 
     private async createEntityClientDomain(
         command: Command,
     ): Promise<OrderDomainEntityBase> {
-        
-        const responseClient = this.GetClientCaseUse.execute({ClientID: command.clientID})
+        const GetClient = new GetClientCaseUse(this.orderService, this.GetClientEventPublisher)
+        const responseClient =  await  GetClient.execute({ClientID: command.clientID})
 
-        const responseManga = this.GetMangaCaseUse.execute({MangaID: command.MangaID})
+        const GetManga = new GetMangaCaseUse(this.orderService, this.GetMangaEventPublisher)
+
+        const responseManga =  await GetManga.execute({MangaID: command.MangaID})
       
         const orderId = new IdOrdertValueObject(command.idOrder);
 
@@ -88,9 +85,9 @@ export class RegisterOrderCaseUse<
         ); }
 
         return new OrderDomainEntityBase({
-            client:  (await responseClient).data ,
-            Manga: (await responseManga).data,
-            orderId: orderId
+            Manga:  responseManga.data,
+            client:  responseClient.data ,
+            orderId: orderId.valueOf()
         })
     }
 

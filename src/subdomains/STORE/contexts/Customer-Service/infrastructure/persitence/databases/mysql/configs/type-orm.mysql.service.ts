@@ -23,7 +23,7 @@ export class TypeOrmMysqlConfigService implements TypeOrmOptionsFactory {
             entities: [
                 BillEntityDB,ClientEntityDB,saleEntityBd,OrderEntityDb,SellerEntityDB,MangaEntityDb
             ],
-            synchronize: false,
+            synchronize: true,
         }
     }
 

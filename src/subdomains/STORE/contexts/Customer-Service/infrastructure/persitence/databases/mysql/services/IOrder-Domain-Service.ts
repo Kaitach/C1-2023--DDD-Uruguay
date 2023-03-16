@@ -38,7 +38,9 @@ export class OrdertMySqlService implements IorderDomainService<OrderEntityDb> {
     }
 
     UpdateMangaStock(data: MangaEntityDb): Promise<MangaEntityDb> {
-      
+        console.log("2312312312")
+
+        console.log(data)
         return this.MangaRepository.update(data.Mangaid, data)
         }
 

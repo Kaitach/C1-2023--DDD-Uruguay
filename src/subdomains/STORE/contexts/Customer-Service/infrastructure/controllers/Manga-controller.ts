@@ -1,7 +1,7 @@
 
 
 
-import { Controller, Post, Body, Get, Put } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Param } from '@nestjs/common';
 import {  GetMangaCaseUse, UpdateMangaStockCaseUse, UpdateNameUseCase, UpdatePriceUseCase, UpdateStateUseCase } from '../../application';
 import {  IGetManga } from '../../domain/interfaces/commands';
 import {
@@ -9,7 +9,8 @@ import {
   IMangaObtainedEventPublisher,
 } from '../messaging/publisher/order';
 import {  INameMangaModifiedEventPublisher, IPrinceModifiedEventPublisher, IStateModifiedEventPublisher } from '../messaging/publisher/order/manga';
-import {  MangaService } from '../persitence';
+import {  MangaService, OrderService } from '../persitence';
+import { IGetMangaCommand } from '../utils/commands/order/IGetMangaCommand';
 import { IUpdateMangaName } from '../utils/commands/order/IUpdateMangaName';
 import { IupdateMangaPrice } from '../utils/commands/order/IupdateMangaPrice';
 import { IUpdateMangaStockCommand } from '../utils/commands/order/IUpdateMangaStock';
@@ -24,23 +25,28 @@ export class mangaController {
     private readonly NameMangaModifiedEventPublisher: INameMangaModifiedEventPublisher,
     private readonly IPrinceModifiedEventPublisher: IPrinceModifiedEventPublisher,
     private readonly IStateModifiedEventPublisher: IStateModifiedEventPublisher,
+    private readonly orderService: OrderService,
+
 
   ) {}
 
 
 
-  @Get()
-  getManga(@Body() command: IGetManga) {
-    const useCase = new  GetMangaCaseUse (this.mangaService,  this.getMangaEventPublisher)
+  @Get(":id")
+  getManga( @Param('id') id: string ) {
+    const command =  new IGetMangaCommand
+    command.MangaID = id;
+    const useCase = new  GetMangaCaseUse (this.orderService,  this.getMangaEventPublisher)
     return useCase.execute(command)
     
   }
 
   
 
-  @Put('UpdateMangaStock')
+  @Post()
   updateMangaStock(@Body() command: IUpdateMangaStockCommand) {
-    const useCase = new  UpdateMangaStockCaseUse (this.mangaService,  this.ModifiedMangaStockingEventPublisher)
+    const useCase = new  UpdateMangaStockCaseUse (this.orderService,  this.ModifiedMangaStockingEventPublisher)
+ 
     return useCase.execute(command)
     
   }

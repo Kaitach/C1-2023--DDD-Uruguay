@@ -10,16 +10,16 @@ export class OrderEntityDb extends OrderDomainEntityBase {
   orderId: string;
 
 
-  @OneToMany(() => ClientEntityDB, (client) => client.ClientID, {
-    cascade: ['insert', 'update']
-  })
-  
-  client: ClientEntityDB;
-  
-
-  @ManyToOne(() => MangaEntityDb, (manga) => manga.order,{
+  @ManyToOne(() => ClientEntityDB, (client) => client.ClientID, {
     cascade: ['insert', 'update']
   })
   @JoinColumn()
-  manga: MangaEntityDb;
+  client: ClientEntityDB;
+  
+
+  @ManyToOne(() => MangaEntityDb, (Manga) => Manga.Mangaid,{
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn()
+  Manga: MangaEntityDb;
 }

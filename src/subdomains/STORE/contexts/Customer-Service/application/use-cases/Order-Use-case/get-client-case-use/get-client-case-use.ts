@@ -21,8 +21,8 @@ export class GetClientCaseUse<
 
     constructor(   
 
-        private readonly orderService?: IorderDomainService,
-        private readonly GetClientEventPublisher?: ClientObtainedEventPublisher,
+        private readonly orderService: IorderDomainService,
+        private readonly GetClientEventPublisher: ClientObtainedEventPublisher,
     ) {
         super();
         this.OrderAgregate = new OrderAgregate({
@@ -38,8 +38,10 @@ export class GetClientCaseUse<
     }
 
     private async executeCommand(
+        
         command: Command
     ): Promise< ClientDomainBase | null> {
+        console.log(command)
         
         return this.OrderAgregate.GetClient(command.ClientID)
 

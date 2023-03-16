@@ -34,7 +34,7 @@ Publisher events go in this place
   /* A way to define the events that will be used in the aggregate. */
   private readonly RegisterOrderEventPublisher: OrderAddEventPublisher;
   private readonly AddCustomerEventPublisher: ClientAddEventPublisher;
-  private readonly GetClientEventPublisher: ClientObtainedEventPublisher;
+  private  GetClientEventPublisher: ClientObtainedEventPublisher;
   private readonly DeleteOrderEventPublisher: DeleteOrderEventPublisher;
   private readonly GetMangaEventPublisher: MangaObtainedEventPublisher;
   private readonly ModifiedClientEventPublisher: ClientModifiedEventPublisher;
@@ -126,14 +126,16 @@ Publisher events go in this place
    * @returns The result of the GetClient method of the OrderService
    */
   async GetClient(data: string): Promise<ClientDomainBase> {
-    if (this.orderService && this.GetClientEventPublisher) {
+  
+
+    if (this.orderService && this.GetClientEventPublisher  ) {
       
       const result = await this.orderService.GetClient(data);
 
       this.GetClientEventPublisher.response = result
 
       this.GetClientEventPublisher.publish();
-
+      console.log(result)
       return this.GetClientEventPublisher.response;
     }
     throw new AggregateRootException(

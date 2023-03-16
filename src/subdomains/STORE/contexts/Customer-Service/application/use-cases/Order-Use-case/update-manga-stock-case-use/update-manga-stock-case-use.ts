@@ -4,7 +4,7 @@ import { MangaDomainBase, IMangaEntity } from "../../../../domain/entities";
 import { MangaModifiedEventPublisher } from "../../../../domain/events/publishers/order";
 import { IUpdateMangaStock } from "../../../../domain/interfaces/commands";
 import { UpradedMangaStockResponse } from "../../../../domain/interfaces/responses/Order-Response";
-import { MangaDomainService } from "../../../../domain/services";
+import { IorderDomainService, MangaDomainService } from "../../../../domain/services";
 import { IdmangaValue, StockValue, NameMangaValue } from "../../../../domain/value-objects";
 
 export class UpdateMangaStockCaseUse<
@@ -18,12 +18,12 @@ export class UpdateMangaStockCaseUse<
     private readonly OrderAgregate: OrderAgregate;
 
     constructor(
-        private readonly MangaService: MangaDomainService,
+        private readonly orderService: IorderDomainService,
         private readonly ModifiedMangaStockingEventPublisher: MangaModifiedEventPublisher,
     ) {
         super();
         this.OrderAgregate = new OrderAgregate({
-            MangaService,
+            orderService,
             ModifiedMangaStockingEventPublisher
         })        
     }
@@ -37,6 +37,8 @@ export class UpdateMangaStockCaseUse<
     private async executeCommand(
         command: Command
     ): Promise<MangaDomainBase | null> {
+        console.log(command)
+
         const ValueObject = this.createValueObject(command);
         this.validateValueObject(ValueObject);
         const entity = this.createEntityMangaStock(ValueObject);
@@ -46,27 +48,24 @@ export class UpdateMangaStockCaseUse<
     private createValueObject(
         command: Command
     ): IMangaEntity {
-        const Mangaid =  new IdmangaValue(command.MangaId)
-        const  Stock  = new   StockValue (command.MangaStock)
+        const Mangaid = command.MangaId
+        const  Stock  = new   StockValue (command.MangaStock).value
         return {
-            Mangaid,
-            Stock
+            Stock,
+            Mangaid
         }
     }
 
     private validateValueObject(
         valueObject: MangaDomainBase
     ): void {
-        
+
         const {
-            Mangaid,
+            
             Stock
         } = valueObject
       
       
-        if (Mangaid instanceof NameMangaValue && Mangaid.hasErrors())
-        this.setErrors(Mangaid.getErrors());
-
         if (Stock instanceof StockValue && Stock.hasErrors())
             this.setErrors(Stock.getErrors());
 
@@ -85,13 +84,13 @@ export class UpdateMangaStockCaseUse<
     ): MangaDomainBase {
        
         const {
+            Mangaid,
             Stock,
-            Mangaid
         } = valueObject
 
-        return new MangaDomainBase({          
-            Stock: Stock,
-            Mangaid: Mangaid
+        return new MangaDomainBase({  
+            Mangaid: Mangaid,      
+            Stock: Stock.valueOf(),
         })
 
     }
@@ -99,6 +98,6 @@ export class UpdateMangaStockCaseUse<
     private exectueOrderAggregateRoot(
         entity: MangaDomainBase,
     ): Promise<MangaDomainBase | null> {
-        return this.OrderAgregate.UpdateName(entity)
+        return this.OrderAgregate.UpdateMangaStock(entity)
     }
 }

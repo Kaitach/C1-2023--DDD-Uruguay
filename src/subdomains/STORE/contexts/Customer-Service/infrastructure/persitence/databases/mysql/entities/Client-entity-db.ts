@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, Index, ManyToOne, OneToOne, PrimaryGeneratedColumn, } from "typeorm";
+import { BaseEntity, Column, Entity, Index, OneToMany, OneToOne, PrimaryGeneratedColumn, } from "typeorm";
 import { ClientDomainBase } from '../../../../../domain/entities/Order-domain/client-domain-entity';
 import { OrderEntityDb } from "./Order-entity-db";
 
@@ -16,8 +16,8 @@ export class ClientEntityDB  extends ClientDomainBase{
     Phone?: number;
 
 
-    // @OneToMany(() => OrderEntityDb, order => order.client)
-    // order?: OrderEntityDb;
+    @OneToMany(() => OrderEntityDb, order => order.client)
+    order?: OrderEntityDb;
     
 
 }

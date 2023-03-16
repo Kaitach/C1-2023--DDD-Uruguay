@@ -1,25 +1,25 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, Index } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, Index, OneToMany } from 'typeorm';
 import { MangaDomainBase } from '../../../../../domain/entities/Order-domain/manga-domain-entity';
 import { OrderEntityDb } from "./Order-entity-db";
 
 @Entity()
 export class MangaEntityDb extends MangaDomainBase{
   @PrimaryGeneratedColumn('uuid') 
-   Mangaid: string;
-   @Index()
+   Mangaid?: string;
 
   @Column()
-  Name: string;
+  Name?: string;
 
   @Column()
-  state: string;
+  state?: string;
 
   @Column()
-  Price: number;
+  Price?: number;
 
   @Column()
-  Stock: number;
+  Stock?: number;
 
-  @ManyToOne(() => OrderEntityDb, order => order.Manga)
-  order: OrderEntityDb;
+  @OneToMany(() => OrderEntityDb, order => order.Manga)
+
+  order?: OrderEntityDb;
 }

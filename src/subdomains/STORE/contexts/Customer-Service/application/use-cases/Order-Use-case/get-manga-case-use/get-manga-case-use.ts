@@ -1,7 +1,7 @@
 import { IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/libs";
 import { OrderAgregate } from "../../../../domain/aggregates/order.agregate";
 import { ClientObtainedResponse } from '../../../../domain/interfaces/responses/Order-Response/client-obtained-response';
-import { ClientDomainService, MangaDomainService } from "../../../../domain/services";
+import { ClientDomainService, IorderDomainService, MangaDomainService } from "../../../../domain/services";
 import { ClientDomainBase } from '../../../../domain/entities/Order-domain/client-domain-entity';
 import { ClientNameValue,  IdmangaValue,  MangaSateValue,  NameMangaValue,  PhoneValue, PriceValue, StockValue } from "../../../../domain/value-objects";
 import { MangaDomainBase } from '../../../../domain/entities/Order-domain/manga-domain-entity';
@@ -22,12 +22,12 @@ export class GetMangaCaseUse<
     private readonly OrderAgregate: OrderAgregate;
 
     constructor(
-        private readonly MangaService: MangaDomainService,
+        private readonly orderService: IorderDomainService,
         private readonly GetMangaEventPublisher: MangaObtainedEventPublisher,
     ) {
         super();
         this.OrderAgregate = new OrderAgregate({
-            MangaService,
+            orderService,
             GetMangaEventPublisher,
         })
     }
