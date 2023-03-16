@@ -47,7 +47,7 @@ export class UpdateNameSallerUseCase<
     private createValueObject(
         command: Command
     ): ISellerEntity {
-        const IdSeller =  new IdsellerValue (command.idseller).value
+        const IdSeller =  command.idseller
         const Name  = command.Name
         console.log(command)
 
@@ -94,7 +94,7 @@ export class UpdateNameSallerUseCase<
         } = valueObject
         console.log(Name)
         return new SellerDomain({          
-            IdSeller: IdSeller.valueOf(),
+            IdSeller: IdSeller,
             Name: Name
         })
 

@@ -3,7 +3,7 @@ import { NameSellerValue } from "../../../value-objects/Sale/Seller/name-value";
 
 export interface ISellerEntity {
 
-IdSeller: string |   IdsellerValue
+IdSeller?: string |   IdsellerValue
 Name:   string |   NameSellerValue
 
 }

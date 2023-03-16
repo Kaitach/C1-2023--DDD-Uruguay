@@ -8,7 +8,7 @@ import { saleEntityBd } from './Sale-entity';
 export class SellerEntityDB  extends SellerDomain{
 
     @PrimaryGeneratedColumn('uuid')
-    IdSeller: string 
+    IdSeller?: string 
     @Index()
 
     @Column()

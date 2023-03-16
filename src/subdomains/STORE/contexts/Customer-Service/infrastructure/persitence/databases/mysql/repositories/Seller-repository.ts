@@ -28,6 +28,8 @@ export class SellerRepository
                 ...sellerEntity,
                 Seller,
             };
+            newEntity.IdSeller = Seller.IdSeller
+            console.log(sellerEntity, Seller)
             return this.repository.save(newEntity);
         }
         throw new NotFoundException(`Vendedor con id ${IdSeller} no encontrado`);
