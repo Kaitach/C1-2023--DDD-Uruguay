@@ -75,7 +75,7 @@ export class SaleAgregate
     this.BillObtainedEventPublisher = BillObtainedEventPublisher;
   }
   async GetBil(data: string): Promise<BillDomain> {
-    if (this.billservice && this.BillObtainedEventPublisher) {
+    if (this.saleservice && this.BillObtainedEventPublisher) {
       const result = await this.saleservice.GetBil(data);
       this.BillObtainedEventPublisher.response = result;
       this.BillObtainedEventPublisher.publish();
@@ -134,17 +134,7 @@ export class SaleAgregate
     );
   }
 
-  async getMangaData(idManga: string): Promise<MangaDomainBase> {
-    if (this.billservice && this.MangaObtainedEventPublisher) {
-      const result = await this.billservice.getMangaData(idManga);
-      this.MangaObtainedEventPublisher.response = result;
-      this.MangaObtainedEventPublisher.publish();
-      return this.MangaObtainedEventPublisher.response;
-    }
-    throw new AggregateRootException(
-      'SaleAgregate "billservice" y/o "MangaObtainedEventPublisher" no estan definidos',
-    );
-  }
+
 
   async RegisterSale(sale: SaleDomainEntity): Promise<SaleDomainEntity> {
     if (this.billservice && this.AddedSaleEventPublisher) {

@@ -8,7 +8,7 @@ import { MangaRepository } from '../repositories/Manga-repository';
 
 export class BillMySqlService implements BillDomainService<BillEntityDB> {
 
-    constructor( private readonly BillRepository: BillRepository, private readonly MangaRepository: MangaRepository){}
+    constructor( private readonly BillRepository: BillRepository){}
 
 
     UpdatePaymentMethod(data: BillEntityDB): Promise<BillEntityDB> {
@@ -17,8 +17,5 @@ export class BillMySqlService implements BillDomainService<BillEntityDB> {
     UpdateTotal(data: BillEntityDB): Promise<BillEntityDB> {
         return this.BillRepository.update(data.IDBill, data)
     }
-     getMangaData(data: string): Promise<MangaEntityDb> {
-        return  this.MangaRepository.findById(data)
-        
-    }
+   
 }

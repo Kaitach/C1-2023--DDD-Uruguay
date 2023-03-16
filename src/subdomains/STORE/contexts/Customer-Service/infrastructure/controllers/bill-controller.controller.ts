@@ -1,5 +1,5 @@
 import { IPaymentMethodEventPublisher } from './../messaging/publisher/Sale/Bill/Payment-method-messaging-publisher';
-import { Body, Controller, Get, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { GetBillUseCase,  UpdatePaymentUseCase, UpdateTotalUseCase } from '../../application';
 import { IupdatePaymentMethod } from '../utils/commands/sale/IupdatePaymentMethod';
 import { BillService } from '../persitence/services/SaleServices/BillService';
@@ -25,8 +25,12 @@ export class BillControllerController {
       ) {}
 
 
-    @Get()
-    getBill(@Body() command: IGetBill) {
+     
+    @Get(':id')
+    getBill(@Param('id') id: string ) {
+      const command =  new IGetBill
+      command.BillID = id;
+      console.log(this.SaleService)
       const useCase = new  GetBillUseCase (this.SaleService,  this.IBillObtainedEventPublisher)
       return useCase.execute(command)
       

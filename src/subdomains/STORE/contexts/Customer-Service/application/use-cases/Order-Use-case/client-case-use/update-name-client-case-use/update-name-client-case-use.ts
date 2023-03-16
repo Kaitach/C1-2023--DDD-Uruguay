@@ -5,7 +5,7 @@ import { NameModifiedEventPublisher, ClientObtainedEventPublisher } from "src/su
 import { UpdateNameClient } from "src/subdomains/Store/contexts/Customer-Service/domain/interfaces/commands";
 import { UpradedNameResponse } from "src/subdomains/Store/contexts/Customer-Service/domain/interfaces/responses/Order-Response";
 
-import { ClientDomainService } from "src/subdomains/Store/contexts/Customer-Service/domain/services";
+import { ClientDomainService, IorderDomainService } from "src/subdomains/Store/contexts/Customer-Service/domain/services";
 import { ClientNameValue, IdclientValue } from "src/subdomains/Store/contexts/Customer-Service/domain/value-objects";
 
 export class UpdateNameClientCaseUse<
@@ -25,7 +25,7 @@ export class UpdateNameClientCaseUse<
         super();
         this.OrderAgregate = new OrderAgregate({
             ClientService,
-            ModifiedClientEventPublisher
+            ModifiedClientEventPublisher,
         })
     }
 
@@ -103,6 +103,7 @@ export class UpdateNameClientCaseUse<
     private exectueOrderAggregateRoot(
         entity: ClientDomainBase,
     ): Promise<ClientDomainBase | null> {
+        console.log(this.ClientService)
         return this.OrderAgregate.UpdateClientName(entity)
     }
 }

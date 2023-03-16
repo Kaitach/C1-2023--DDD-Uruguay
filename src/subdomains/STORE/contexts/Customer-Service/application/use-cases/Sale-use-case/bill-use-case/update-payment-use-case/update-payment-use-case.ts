@@ -47,7 +47,7 @@ export class UpdatePaymentUseCase<
     private createValueObject(
         command: Command
     ): IBillEntity {
-        const IDBill =  new IdbillValue(command.idBill)
+        const IDBill =  new IdbillValue(command.idBill).value
         const  PaymentMethod  = new  PaymentMethodValue (command.paymentMethod)
         return {
             IDBill,
@@ -91,7 +91,7 @@ export class UpdatePaymentUseCase<
         } = valueObject
 
         return new BillDomain({          
-            IDBill: IDBill,
+            IDBill: IDBill.valueOf(),
             PaymentMethod: PaymentMethod
         })
 

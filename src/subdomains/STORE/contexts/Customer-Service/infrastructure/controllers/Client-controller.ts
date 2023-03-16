@@ -36,11 +36,14 @@ export class ClientController {
       this.ClientService,
       this.ModifiedClientEventPublisher,
     );
+    console.log(this.ClientService)
     useCase.execute(command);
   }
 
   @Put('update-client-phone')
   updateClientPhone(@Body() command: IupdatePhoneClient) {
+    console.log(this.ClientService)
+
     const useCase = new UpdatePhoneClientCaseUse(
       this.ClientService,
       this.IPhoneModifiedEventPublisher,
@@ -62,8 +65,7 @@ export class ClientController {
   @Get(':id')
   getClient(@Param('id') id: string ) {
     const command =  new IGetClientCommand
-    command.ClientID = id; // Asignar el valor del id al objeto 
-    
+    command.ClientID = id;
     const useCase = new GetClientCaseUse(this.orderService, this.IClientOrderObtainedEventPublisher);
     return useCase.execute(command);
   }

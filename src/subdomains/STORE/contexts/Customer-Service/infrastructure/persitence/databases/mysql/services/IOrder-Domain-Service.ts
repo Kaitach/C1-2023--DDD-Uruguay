@@ -13,7 +13,9 @@ import { IaddClientCOmmand } from '../../../../utils/commands/order/IaddClientCO
 @Injectable()
 export class OrdertMySqlService implements IorderDomainService<OrderEntityDb> {
 
-    constructor(private readonly OrderRepository: OrderRepository, private readonly MangaRepository: MangaRepository, private readonly ClientRepository: ClientRepository
+    constructor(private readonly OrderRepository: OrderRepository,
+         private readonly MangaRepository: MangaRepository,
+          private readonly ClientRepository: ClientRepository
        ) { }
 
 
@@ -38,9 +40,7 @@ export class OrdertMySqlService implements IorderDomainService<OrderEntityDb> {
     }
 
     UpdateMangaStock(data: MangaEntityDb): Promise<MangaEntityDb> {
-        console.log("2312312312")
-
-        console.log(data)
+     
         return this.MangaRepository.update(data.Mangaid, data)
         }
 

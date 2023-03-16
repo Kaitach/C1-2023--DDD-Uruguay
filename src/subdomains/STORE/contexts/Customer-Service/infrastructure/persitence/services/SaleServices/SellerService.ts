@@ -4,4 +4,6 @@ import { SellerMySqlService } from '../../databases/mysql/services/ISeller-Domai
 
 
 @Injectable()
-export class SellerService extends SellerMySqlService {  }
+export class SellerService extends SellerMySqlService { 
+   
+ }

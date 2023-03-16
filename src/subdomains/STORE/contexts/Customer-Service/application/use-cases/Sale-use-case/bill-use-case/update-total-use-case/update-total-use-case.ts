@@ -46,8 +46,8 @@ export class UpdateTotalUseCase<
     private createValueObject(
         command: Command
     ): IBillEntity {
-        const IDBill =  new IdbillValue(command.idBill)
-        const Total  = new  TotalValue (command.total)
+        const IDBill =  new IdbillValue(command.idBill).value
+        const Total  = new  TotalValue (command.total).value
         return {
             IDBill,
             Total
@@ -60,15 +60,15 @@ export class UpdateTotalUseCase<
         
         const {
             IDBill,
-            PaymentMethod
+            Total
         } = valueObject
       
-      
+        console.log(Total)
         if ( IDBill instanceof  IdbillValue &&  IDBill.hasErrors())
         this.setErrors(IDBill.getErrors());
 
-        if (PaymentMethod instanceof  PaymentMethodValue && PaymentMethod.hasErrors())
-            this.setErrors(PaymentMethod.getErrors());
+        if (Total instanceof  TotalValue && Total.hasErrors())
+            this.setErrors(Total.getErrors());
 
         if (this.hasErrors() === true)
             throw new ValueObjectException(
@@ -99,6 +99,6 @@ export class UpdateTotalUseCase<
     private exectueSaleAggregateRoot(
         entity: BillDomain,
     ): Promise<BillDomain | null> {
-        return this.SaleAgregate.UpdatePaymentMethod(entity)
+        return this.SaleAgregate.UpdateTotal(entity)
     }
 }

@@ -33,13 +33,13 @@ export class SellerController {
     }
 
     @Post()
-    createSeller(@Body() command: IAddsallerCommand) {
+    async createSeller(@Body() command: IAddsallerCommand) {
       const useCase = new AddSallerUseCase(
         this.SaleService,
         this.IAddedSellerEventPublisher,
       );
       console.log(command)
-      useCase.execute(command);
+     return await useCase.execute(command);
     }
 
 

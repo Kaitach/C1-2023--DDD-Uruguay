@@ -1,12 +1,8 @@
-import { ClientEntityDB } from './../entities/Client-entity-db';
 import { BillRepository } from './../repositories/Bill-repository';
 import { SellerRepository } from './../repositories/Seller-repository';
-import { SaleDomainEntity, ClientDomainBase, SellerDomain, BillDomain } from "src/subdomains/Store/contexts/Customer-Service/domain/entities";
-import { IGetClientSale, IUpdateNameSeller, IUpdateBill } from "src/subdomains/Store/contexts/Customer-Service/domain/interfaces/commands";
 import { SaleDomainService } from "src/subdomains/Store/contexts/Customer-Service/domain/services";
 import { saleEntityBd } from "../entities/Sale-entity";
 import { SaleRepository } from '../repositories/Sale-Repository';
-import { ClientRepository } from '../repositories'
 import { SellerEntityDB } from '../entities/sellerEntityDb';
 import { BillEntityDB } from '../entities/Bill-entity';
 
@@ -14,7 +10,9 @@ import { BillEntityDB } from '../entities/Bill-entity';
 
 export class SaleMySqlService
     implements SaleDomainService<saleEntityBd>{
-    constructor(private readonly SaleRepository: SaleRepository, private readonly BillRepository: BillRepository, private readonly SellerRepository: SellerRepository) { }
+    constructor(private readonly SaleRepository: SaleRepository,
+         private readonly BillRepository: BillRepository,
+          private readonly SellerRepository: SellerRepository) { }
 
     RegisterSale(data: saleEntityBd): Promise<saleEntityBd> {
         return this.SaleRepository.create(data)
@@ -23,9 +21,8 @@ export class SaleMySqlService
     GetSalesList(data: string): Promise<saleEntityBd> {
         return this.SaleRepository.findById(data)
     }
-    AddSeller(data: SellerEntityDB): Promise<SellerEntityDB> {
-        console.log("aca esta todo bien")
-        return this.SellerRepository.create(data)
+     AddSeller(data: SellerEntityDB): Promise<SellerEntityDB> {
+        return  this.SellerRepository.create(data)
     }
     UpdateSeller(data: SellerEntityDB): Promise<SellerEntityDB> {
        
@@ -38,6 +35,8 @@ export class SaleMySqlService
     }
 
     GetBil(data: string): Promise<BillEntityDB> {
+
+        console.log(data)
         return this.BillRepository.findById(data)
     }
 
