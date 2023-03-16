@@ -1,4 +1,4 @@
-import { EventPublisherBase } from "src/libs";
+import { EventPublisherBase } from '../../../../../../../../../libs';
 import { ClientDomainBase } from "../../../../entities/Order-domain/client-domain-entity";
 
 export class PhoneModifiedEventPublisher <

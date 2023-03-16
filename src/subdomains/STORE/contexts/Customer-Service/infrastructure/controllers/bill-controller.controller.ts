@@ -8,7 +8,9 @@ import { IBillObtainedEventPublisher } from '../messaging/publisher/Sale/IBillOb
 import { IGetBill } from '../utils/commands/sale/IGetBill';
 import { IupdateTotalcommand } from '../utils/commands/sale/IupdateTotal';
 import { ITotalModifiedEventPublisher } from '../messaging/publisher/Sale/Bill/total-modified--messaging-publisher';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Bill')
 @Controller('Bill')
 export class BillControllerController {
 
@@ -25,7 +27,7 @@ export class BillControllerController {
       ) {}
 
 
-     
+    @ApiOperation({summary: "Get id"})
     @Get(':id')
     getBill(@Param('id') id: string ) {
       const command =  new IGetBill
@@ -36,6 +38,8 @@ export class BillControllerController {
       
     }
 
+    @ApiOperation({summary: "update total"})
+
     @Put('Bill-total')
     updateBillTotal(@Body() command: IupdateTotalcommand) {
       const useCase = new UpdateTotalUseCase(
@@ -45,6 +49,8 @@ export class BillControllerController {
       useCase.execute(command);
     }
   
+    @ApiOperation({summary: "update payment Method"})
+
     @Put('Bill-Payment-Method')
     updateBillPyment(@Body() command: IupdatePaymentMethod) {
       const useCase = new UpdatePaymentUseCase(

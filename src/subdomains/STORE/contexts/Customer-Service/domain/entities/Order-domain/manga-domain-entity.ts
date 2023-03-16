@@ -2,6 +2,7 @@ import { IdmangaValue, NameMangaValue, MangaSateValue, PriceValue, StockValue } 
 import { IMangaEntity } from "../interfaces/Order/manga.interface";
 import { v4 as uuidv4 } from 'uuid';
 
+/* A class that implements the IMangaEntity interface. */
 export class MangaDomainBase implements IMangaEntity {
     Mangaid?: string |IdmangaValue;
     Name?: string |  NameMangaValue;
@@ -11,6 +12,13 @@ export class MangaDomainBase implements IMangaEntity {
 
 
 
+   /**
+    * The constructor function is a function that is called when a new instance of the class is created
+    * 
+    * Arguments:
+    * 
+    * * `_data`: IMangaEntity
+    */
     constructor (_data?: IMangaEntity){
 
         if(_data?.Mangaid) this.Mangaid = _data.Mangaid

@@ -1,4 +1,4 @@
-import { EventPublisherBase } from 'src/libs';
+import { EventPublisherBase } from '../../../../../../../../../libs';
 import { MangaDomainBase } from '../../../../entities/Order-domain/manga-domain-entity';
 export class NameMangaModifiedEventPublisher  <
 Response = MangaDomainBase

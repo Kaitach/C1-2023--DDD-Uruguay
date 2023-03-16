@@ -1,15 +1,9 @@
+
+
 import { AggregateRootException } from 'src/libs';
-
-import {
-  OrderDomainEntityBase,
-  ClientDomainBase,
-  MangaDomainBase,
-} from '../../entities';
-import { ClientAddEventPublisher, ClientModifiedEventPublisher, ClientObtainedEventPublisher, DeleteOrderEventPublisher, MangaModifiedEventPublisher, MangaObtainedEventPublisher, NameMangaModifiedEventPublisher, NameModifiedEventPublisher, OrderAddEventPublisher, OrderModifiedEventPublisher, PhoneModifiedEventPublisher, PrinceModifiedEventPublisher, StateModifiedEventPublisher } from '../../events/publishers/order';
-import { IUpdateOrder, IDeleteOrder, IUpdateMangaStock, IUpdateClient, UpdateStateManga, UpdatePriceManga } from '../../interfaces/commands';
-
-
-
+import { OrderDomainEntityBase, ClientDomainBase, MangaDomainBase } from '../../entities';
+import { OrderAddEventPublisher, ClientAddEventPublisher, DeleteOrderEventPublisher, ClientModifiedEventPublisher, MangaModifiedEventPublisher, OrderModifiedEventPublisher, NameMangaModifiedEventPublisher, PrinceModifiedEventPublisher, StateModifiedEventPublisher, NameModifiedEventPublisher, PhoneModifiedEventPublisher } from '../../events/publishers/order';
+import { ClientObtainedEventPublisher, MangaObtainedEventPublisher } from '../../events/publishers/Sale';
 import {
   IorderDomainService,
   ClientDomainService,

@@ -1,6 +1,7 @@
 
 import { ClientNameValue } from "./";
 
+ /* Testing the name with numbers. */
   describe("Nombre correcto", () => {
     it("test name" , () => {
 
@@ -20,6 +21,7 @@ import { ClientNameValue } from "./";
          
     });
 
+   /* Testing the name with numbers. */
     it("prueba nombre con numeros " , () => {
 
         const value = "Fr4nc0 Torres";
@@ -37,6 +39,7 @@ import { ClientNameValue } from "./";
         
       });
 
+   /* *|MARCADOR_CURSOR|* */
       it("prueba nombre  con espacios " , () => {
 
         const value = "F R A N C O ";

@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 import { IEventPublisher } from 'src/libs';
-import { MangaObtainedEventPublisher } from 'src/subdomains/Store/contexts/Customer-Service/domain/events/publishers/order';
+import { MangaObtainedEventPublisher } from 'src/subdomains/Store/contexts/Customer-Service/domain/events/publishers/Sale';
 import { BillDomain } from '../../../../../domain/entities/Sale-domain/bill-domain-entity';
 export class IMangaObtainedEventPublisher  extends MangaObtainedEventPublisher {
     constructor(@Inject('MANGA_STORE_CONTEXT') private readonly proxy: ClientProxy){

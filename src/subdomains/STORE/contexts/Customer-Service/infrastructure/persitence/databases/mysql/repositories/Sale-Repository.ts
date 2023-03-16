@@ -12,6 +12,7 @@ export class SaleRepository
        
         
   async findById(IDSale: string): Promise<saleEntityBd> {
+    console.log(IDSale)
     const Seller = await this.repository.findOneBy({ IDSale })
     console.log(Seller.Seller)
     if (!Seller) throw new BadRequestException(`Venta con id ${IDSale} no encontrado`)
