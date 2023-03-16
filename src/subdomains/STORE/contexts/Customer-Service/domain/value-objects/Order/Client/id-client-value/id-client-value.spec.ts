@@ -1,7 +1,9 @@
 import { IdClientValueObject } from './';
+/* A test case for the IdClientValueObject class. */
 
 describe("validate Id", () => {
 
+/* The above code is validating the UUID of the client. */
   it("Validando client UUID", () => {
     const value = "validando uuid";
     const mangaId = new IdClientValueObject(value);

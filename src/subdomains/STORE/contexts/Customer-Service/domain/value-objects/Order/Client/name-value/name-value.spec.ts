@@ -4,7 +4,7 @@ import { ClientNameValue } from "./";
   describe("Nombre correcto", () => {
     it("test name" , () => {
 
-      const value = "Franco Torres";
+      const value = "Franco";
 
       const NameClient = new ClientNameValue(value);
 
@@ -15,7 +15,7 @@ import { ClientNameValue } from "./";
 
       if (errors.length > 0) {
         expect(errors[0].field).toEqual('Name');
-        expect(errors[0].message).toBe('El dato ingresado en "name"  contiene una estructura valida ');
+        expect(errors[0].message).toBe('El dato ingresado en "name" no contiene una estructura valida ');
             }
          
     });

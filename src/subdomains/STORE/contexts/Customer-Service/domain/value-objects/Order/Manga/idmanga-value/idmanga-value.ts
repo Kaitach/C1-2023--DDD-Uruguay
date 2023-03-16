@@ -30,7 +30,7 @@ private validateStructure(): void {
     if(this.value && !IsUuid(this.value) === false)
 {
     const error = {
-      field: 'UsuarioId',
+      field: 'manga id',
       message: 'El id no contiene una estructura valida '
     }
     this.setError(error)

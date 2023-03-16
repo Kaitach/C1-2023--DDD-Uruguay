@@ -1,5 +1,4 @@
-import { ValueObjectBase } from "src/libs/sofka/bases/object-value.base";
-import { isMangaName } from "src/libs/validations/is-mangaName.validations";
+import { isMangaName, ValueObjectBase } from "../../../../../../../../../libs";
 
 
 export class NameMangaValue extends ValueObjectBase<string>{

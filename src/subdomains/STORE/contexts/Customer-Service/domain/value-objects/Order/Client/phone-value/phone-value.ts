@@ -1,5 +1,5 @@
-import { ValueObjectBase } from "src/libs/sofka/bases/object-value.base";
-import { isPhone } from "src/libs/validations/is-phone.validations";
+import { ValueObjectBase, isPhone } from "../../../../../../../../../libs";
+
 
 
 export class PhoneValue extends ValueObjectBase<number>{
@@ -18,7 +18,7 @@ export class PhoneValue extends ValueObjectBase<number>{
  */
 
   validateData(): void {
-  // this.validateStructure()
+  this.validateStructure()
   }
 
 /* Validating the structure of the data. */
