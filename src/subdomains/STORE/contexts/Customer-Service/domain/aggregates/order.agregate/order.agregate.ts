@@ -280,7 +280,7 @@ Publisher events go in this place
    * @param {number} Price - number - The price of the manga.
    */
   async UpdatePrice(idmanga: MangaDomainBase): Promise<MangaDomainBase> {
-    if (this.orderService && this.PrinceModifiedEventPublisher) {
+    if (this.MangaService && this.PrinceModifiedEventPublisher) {
       const result = await this.MangaService.UpdatePrice(idmanga);
 
       this.PrinceModifiedEventPublisher.response = result;

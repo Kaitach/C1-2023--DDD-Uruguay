@@ -99,6 +99,6 @@ export class UpdatePriceUseCase<
     private exectueOrderAggregateRoot(
         entity: MangaDomainBase,
     ): Promise<MangaDomainBase | null> {
-        return this.OrderAgregate.UpdateName(entity)
+        return this.OrderAgregate.UpdatePrice(entity)
     }
 }

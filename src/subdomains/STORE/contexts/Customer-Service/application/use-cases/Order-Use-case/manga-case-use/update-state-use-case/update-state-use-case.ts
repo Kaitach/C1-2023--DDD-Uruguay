@@ -46,8 +46,8 @@ export class UpdateStateUseCase<
     private createValueObject(
         command: Command
     ): IMangaEntity {
-        const Mangaid =  new IdmangaValue(command.MangaId)
-        const  state  = new   MangaSateValue (command.newState)
+        const Mangaid =  new IdmangaValue(command.MangaId).value
+        const  state  = new   MangaSateValue (command.State).value
         return {
             Mangaid,
             state
@@ -90,8 +90,8 @@ export class UpdateStateUseCase<
         } = valueObject
 
         return new MangaDomainBase({          
-            state: state,
-            Mangaid: Mangaid
+            state: state.valueOf(),
+            Mangaid: Mangaid.valueOf()
         })
 
     }
@@ -99,6 +99,6 @@ export class UpdateStateUseCase<
     private exectueOrderAggregateRoot(
         entity: MangaDomainBase,
     ): Promise<MangaDomainBase | null> {
-        return this.OrderAgregate.UpdateName(entity)
+        return this.OrderAgregate.UpdateState(entity)
     }
 }

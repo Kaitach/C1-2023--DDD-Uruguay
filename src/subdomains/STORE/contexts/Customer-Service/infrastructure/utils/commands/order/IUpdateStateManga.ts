@@ -5,5 +5,5 @@ export class IUpdateStateManga implements UpdateStateManga  {
 
     MangaId: string;
     @IsString()
-    newState: string;
+   State: string;
 }
