@@ -1,12 +1,13 @@
 import { ValueObjectErrorHandler, IUseCase, ValueObjectException } from "src/libs";
 import { SaleAgregate } from "../../../../domain/aggregates";
 import { SaleDomainEntity } from "../../../../domain/entities";
-import { SalesObtainedEventPublisher } from "../../../../domain/events/publishers/Sale";
+import { BillObtainedEventPublisher, SalesObtainedEventPublisher, SellerObtainedEventPublisher } from "../../../../domain/events/publishers/Sale";
 import { IRegisterSale } from "../../../../domain/interfaces/commands";
 import { SaleDomainService } from "../../../../domain/services";
 import { IdOrdertValueObject, IdSaleValueObject } from "../../../../domain/value-objects";
 import { GetBillUseCase } from "../get-bill-use-case";
 import { GetSellerUseCase } from "../get-seller-use-case";
+import { AddedSaleEventPublisher } from '../../../../domain/events/publishers/Sale/Added-sale-event-publisher';
 
 
 export class RegisterSaleUseCase<
@@ -16,20 +17,24 @@ export class RegisterSaleUseCase<
     extends ValueObjectErrorHandler
     implements IUseCase<Command, Response>
 {
-
     private readonly SaleAgregate: SaleAgregate;
     private readonly GetBillUseCase: GetBillUseCase
     private readonly GetSellerUseCase: GetSellerUseCase
 
     constructor(
         private readonly saleService: SaleDomainService,
-        private readonly SalesObtainedEventPublisher: SalesObtainedEventPublisher,
-        
+        private readonly AddedSaleEventPublisher: AddedSaleEventPublisher,
+        private BillObtainedEventPublisher : BillObtainedEventPublisher,
+        private SellerObtainedEventPublisher : SellerObtainedEventPublisher,
+
+
     ) {
         super();
         this.SaleAgregate = new SaleAgregate({
             saleService,
-            SalesObtainedEventPublisher
+            AddedSaleEventPublisher,
+            BillObtainedEventPublisher,
+            SellerObtainedEventPublisher
         })
     }
 
@@ -43,41 +48,22 @@ export class RegisterSaleUseCase<
         command: Command
     ): Promise<SaleDomainEntity | null> {
         const entity = this.createentitySaleDomain(command);
-        this.validateValueObject((await entity));
 
         return this.exectueSaleAggregateRoot((await entity ))
     }
 
 
-    private validateValueObject(
-        valueObject: SaleDomainEntity
-    ): void {
-        const {
-            IDOrder,                       
-            IDSale, 
-        } = valueObject
-      
 
-        if (IDOrder instanceof IdOrdertValueObject && IDOrder.hasErrors())
-            this.setErrors(IDOrder.getErrors());    
-
-        if (IDSale instanceof IdSaleValueObject  && IDSale.hasErrors())
-            this.setErrors(IDSale.getErrors());
-
-        if (this.hasErrors() === true)
-            throw new ValueObjectException(
-                'Hay algunos errores en el comando ejecutado para crear cliente',
-                this.getErrors(),
-            );
-
-    }
 
     private async createentitySaleDomain(
         Command : Command
     ): Promise<SaleDomainEntity> {
-        const responseBill = this.GetBillUseCase.execute({ BillID: Command.Billid })
-        
-        const responseSeller = this.GetSellerUseCase.execute({SellerId: Command.Sellerid})
+        const GetBill = new GetBillUseCase(this.saleService, this.BillObtainedEventPublisher)
+
+        const responseBill = GetBill.execute({ BillID: Command.Billid })
+        const GetSeller = new GetSellerUseCase(this.saleService, this.SellerObtainedEventPublisher)
+
+        const responseSeller = GetSeller.execute({SellerId: Command.Sellerid})
 
         const IDSale =  new IdSaleValueObject(Command.IDSale)
         const IDOrder = new IdOrdertValueObject(Command.IDOrder);

@@ -13,7 +13,7 @@ export class BillEntityDB  extends BillDomain{
     @Index()
 
     @Column()
-    PaymentMethod?:string 
+    PaymentMethod?:number 
     
     @Column()
     PaymentAmount?: string ;

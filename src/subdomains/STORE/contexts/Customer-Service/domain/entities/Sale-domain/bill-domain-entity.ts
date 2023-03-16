@@ -12,7 +12,7 @@ import { IdmangaValue } from "../../value-objects";
 
 export class BillDomain implements IBillEntity{
     IDBill?: string |  IdbillValue;
-    PaymentMethod?:string |  PaymentMethodValue;
+    PaymentMethod?:number |  PaymentMethodValue;
     PaymentAmount?: string |  PaymentAmountValue;
     Total?: number |  TotalValue;
     IdClinet?: string |   IdclientValue;

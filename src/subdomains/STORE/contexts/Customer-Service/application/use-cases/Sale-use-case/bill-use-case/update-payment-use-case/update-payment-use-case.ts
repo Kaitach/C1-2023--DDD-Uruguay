@@ -48,7 +48,7 @@ export class UpdatePaymentUseCase<
         command: Command
     ): IBillEntity {
         const IDBill =  new IdbillValue(command.idBill).value
-        const  PaymentMethod  = new  PaymentMethodValue (command.paymentMethod)
+        const  PaymentMethod  = new  PaymentMethodValue (command.paymentMethod).value
         return {
             IDBill,
             PaymentMethod
@@ -70,10 +70,11 @@ export class UpdatePaymentUseCase<
 
         if (PaymentMethod instanceof PaymentMethodValue &&   PaymentMethod.hasErrors())
             this.setErrors(PaymentMethod.getErrors());
+            console.log(PaymentMethod)
 
         if (this.hasErrors() === true)
             throw new ValueObjectException(
-                'Hay algunos errores en el comando ejecutado para cambiar el metodo de pago a  ',
+                'Hay algunos errores en el comando ejecutado para cambiar el metodo de pago ',
                 this.getErrors(),
             );
 
@@ -92,7 +93,7 @@ export class UpdatePaymentUseCase<
 
         return new BillDomain({          
             IDBill: IDBill.valueOf(),
-            PaymentMethod: PaymentMethod
+            PaymentMethod: PaymentMethod.valueOf()
         })
 
     }

@@ -1,5 +1,5 @@
 import { IAddedSellerEventPublisher } from './../messaging/publisher/Sale/added-seller-messaging-publisher';
-import { Controller, Get, Body, Post } from "@nestjs/common";
+import { Controller, Get, Body, Post, Param } from "@nestjs/common";
 import { AddSallerUseCase,  GetSellerUseCase } from "../../application";
 import { SaleService } from "../persitence";
 import { SellerService } from '../persitence/services/SaleServices/SellerService';
@@ -24,9 +24,12 @@ export class SellerController {
     
       ) {}
 
-
-    @Get()
-    getSale(@Body() command: IGetSeller) {
+      
+   
+    @Get(':id')
+    getSale(@Param('id') id: string) {
+      const command =  new IGetSeller
+      command.SellerId = id;
       const useCase = new  GetSellerUseCase (this.SaleService,  this.ISellerObtainedEventPublisher)
       return useCase.execute(command)
       

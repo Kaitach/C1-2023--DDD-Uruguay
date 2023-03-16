@@ -6,6 +6,9 @@ import { SaleService, SellerService } from "../persitence";
 import { IGetSales } from "../utils/commands/sale/IGetSales";
 import { IRegisterSaleCommand } from "../utils/commands/sale/IRegisterSale";
 import { IAddedSellerEventPublisher } from '../messaging/publisher/Sale/added-seller-messaging-publisher';
+import { ISellerObtainedEventPublisher } from "../messaging/publisher/Sale/Seller/ISellerObtainedEventPublisher";
+import { IBillObtainedEventPublisher } from '../messaging/publisher/Sale/IBillObtainedEventPublisher';
+import { BillObtainedEventPublisher } from '../../domain/events/publishers/Sale/Bill/bill-obtained.publish-event';
 
 
 @Controller('Sale')
@@ -17,7 +20,9 @@ export class SaleController {
         private readonly ISalesObtainedEventPublisher: ISalesObtainedEventPublisher,
         private readonly IAddedSaleEventPublisher:  IAddedSaleEventPublisher,
         private readonly SellerService: SellerService,
-        private readonly IAddedSellerEventPublisher:IAddedSellerEventPublisher
+        private readonly IAddedSellerEventPublisher:IAddedSellerEventPublisher,
+        private readonly ISellerObtainedEventPublisher: ISellerObtainedEventPublisher,
+        private readonly BillObtainedEventPublisher: IBillObtainedEventPublisher
 
       
     
@@ -37,6 +42,8 @@ export class SaleController {
       const useCase = new RegisterSaleUseCase(
         this.SaleService,
         this.IAddedSaleEventPublisher,
+        this.BillObtainedEventPublisher,
+        this.ISellerObtainedEventPublisher
       );
       useCase.execute(command);
     }

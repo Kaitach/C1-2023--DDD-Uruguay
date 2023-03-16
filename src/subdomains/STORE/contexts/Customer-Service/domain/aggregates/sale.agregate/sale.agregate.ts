@@ -87,7 +87,7 @@ export class SaleAgregate
   }  
 
   async GetSellers(data: string): Promise<SellerDomain> {
-    if (this.billservice && this.SellerObtainedEventPublisher) {
+    if (this.saleservice && this.SellerObtainedEventPublisher) {
       const result = await this.saleservice.GetSellers(data);
       this.SellerObtainedEventPublisher.response = result;
       this.SellerObtainedEventPublisher.publish();
@@ -137,7 +137,8 @@ export class SaleAgregate
 
 
   async RegisterSale(sale: SaleDomainEntity): Promise<SaleDomainEntity> {
-    if (this.billservice && this.AddedSaleEventPublisher) {
+    console.log(this.AddedSaleEventPublisher)
+    if (this.saleservice && this.AddedSaleEventPublisher) {
       const result = await this.saleservice.RegisterSale(sale);
       this.AddedSaleEventPublisher.response = result;
       this.AddedSaleEventPublisher.publish();
