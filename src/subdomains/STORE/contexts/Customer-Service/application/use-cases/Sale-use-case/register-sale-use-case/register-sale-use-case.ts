@@ -80,8 +80,8 @@ export class RegisterSaleUseCase<
         return new SaleDomainEntity({
           
             Bill: (await responseBill).data ,
-            IDOrder: IDOrder,
-            IDSale:  IDSale,
+            IDOrder: IDOrder.valueOf(),
+            IDSale:  IDSale.valueOf(),
             Seller: (await responseSeller).data,
         })
 

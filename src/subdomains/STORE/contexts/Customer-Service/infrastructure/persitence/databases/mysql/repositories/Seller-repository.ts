@@ -18,7 +18,6 @@ export class SellerRepository
     }
 
     async create(entity: SellerEntityDB): Promise<SellerEntityDB> {
-        console.log("errores verdes")
         return await this.repository.save(entity)
     }
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Post, Put } from "@nestjs/common";
+import { Controller, Get, Body, Post, Put, Param } from "@nestjs/common";
 import { GetSalesListUseCase, RegisterSaleUseCase, UpdateNameSallerUseCase } from "../../application";
 import { IUpdateNameSeller } from "../../domain/interfaces/commands";
 import { IAddedSaleEventPublisher, ISalesObtainedEventPublisher } from "../messaging/publisher/Sale";
@@ -30,8 +30,10 @@ export class SaleController {
       ) {}
 
 
-    @Get()
-    getSale(@Body() command: IGetSales) {
+    @Get(':id')
+    getSale(@Param('id') id: string) {
+      const command =  new IGetSales
+      command.IdSale = id;
       const useCase = new  GetSalesListUseCase (this.SaleService,  this.ISalesObtainedEventPublisher)
       return useCase.execute(command)
       

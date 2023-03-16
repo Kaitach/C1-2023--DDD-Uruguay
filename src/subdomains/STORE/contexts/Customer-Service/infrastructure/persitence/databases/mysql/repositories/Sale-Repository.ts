@@ -17,7 +17,7 @@ export class SaleRepository
     return Seller;
     }
 async create(entity: saleEntityBd): Promise<saleEntityBd> {
-     return this.repository.create(entity)
+     return this.repository.save(entity)
 }
 async update(IDSale: string, SaleEntity: saleEntityBd): Promise<saleEntityBd> {
     const sale = await this.repository.findOneBy({ IDSale });
