@@ -1,4 +1,3 @@
-import { ClientDomainBase } from 'src/subdomains/Store/contexts/Customer-Service/domain/entities';
 import { ClientDomainService } from '../../../../../domain/services/Client-domain-service';
 import { ClientEntityDB } from '../entities/Client-entity-db';
 import { ClientRepository } from '../repositories/Client-Repository';

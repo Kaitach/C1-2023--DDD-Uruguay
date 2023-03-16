@@ -1,12 +1,10 @@
 import { UpdatePhoneClientCaseUse } from './../../application/use-cases/Order-Use-case/client-case-use/update-phone-client-case-use/update-phone-client-case-use';
-import { Controller, Post, Body, Patch, Put, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Put, Get, Param } from '@nestjs/common';
 import { AddCustomerCaseUse, UpdateNameClientCaseUse } from '../../application';
-import { IAddClient, UpdateNameClient } from '../../domain/interfaces/commands';
 import {
   IClientAddEventPublisher,
   IClientOrderObtainedEventPublisher,
   INameModifiedEventPublisher,
-  IOrderAddEventPublisher,
   IPhoneModifiedEventPublisher,
 } from '../messaging/publisher/order';
 import { ClientService } from '../persitence/services/OrderServices/ClientService';

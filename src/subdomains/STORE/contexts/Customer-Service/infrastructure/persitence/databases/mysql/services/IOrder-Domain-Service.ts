@@ -1,14 +1,10 @@
 import { ClientRepository } from './../repositories/Client-Repository';
-import { ClientDomainBase, MangaDomainBase } from "src/subdomains/Store/contexts/Customer-Service/domain/entities";
-import { IUpdateOrder, IDeleteOrder, IUpdateMangaStock, IUpdateClient } from "src/subdomains/Store/contexts/Customer-Service/domain/interfaces/commands";
 import { IorderDomainService } from "src/subdomains/Store/contexts/Customer-Service/domain/services";
-import { OrderService } from "../../../services";
 import { OrderEntityDb, ClientEntityDB } from "../entities";
 import { OrderRepository } from '../repositories/Order-Repository';
 import { MangaRepository } from '../repositories/Manga-repository';
 import { MangaEntityDb } from '../entities/Manga-entity-db';
 import { Injectable } from '@nestjs/common';
-import { IaddClientCOmmand } from '../../../../utils/commands/order/IaddClientCOmmand';
 
 @Injectable()
 export class OrdertMySqlService implements IorderDomainService<OrderEntityDb> {

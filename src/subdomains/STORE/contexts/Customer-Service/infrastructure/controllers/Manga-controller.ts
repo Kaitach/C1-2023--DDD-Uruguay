@@ -1,9 +1,8 @@
 
 
 
-import { Controller, Post, Body, Get, Put, Param } from '@nestjs/common';
+import { Controller, Body, Get, Put, Param } from '@nestjs/common';
 import {  GetMangaCaseUse, UpdateMangaStockCaseUse, UpdateNameUseCase, UpdatePriceUseCase, UpdateStateUseCase } from '../../application';
-import {  IGetManga } from '../../domain/interfaces/commands';
 import {
     IMangaModifiedEventPublisher,
   IMangaObtainedEventPublisher,

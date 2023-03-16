@@ -49,9 +49,9 @@ export class AddCustomerCaseUse<
         command: Command
     ): IClientEntity {
 
-        const ClientID = new IdclientValue(command.ClientID)
-        const  Name = new ClientNameValue(command.Name)
-        const  Phone = new PhoneValue(command.Phone)
+        const ClientID = new IdclientValue(command.ClientID).value
+        const  Name = new ClientNameValue(command.Name).value
+        const  Phone = new PhoneValue(command.Phone).value
 
         return {
            
