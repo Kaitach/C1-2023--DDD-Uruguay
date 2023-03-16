@@ -4,5 +4,5 @@ export class IUpdateNameClient implements UpdateNameClient {
     @IsUUID()
     ClientID: string;
     @IsString()
-    newName: string;
+    Name: string;
 }

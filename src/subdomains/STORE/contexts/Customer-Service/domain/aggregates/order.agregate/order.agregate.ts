@@ -301,10 +301,7 @@ Publisher events go in this place
    * @returns The result of the update of the client name
    */
   async UpdateClientName(    idclient: ClientDomainBase,  ): Promise<ClientDomainBase> {
-    if(this.ClientService) 
-    throw new AggregateRootException(
-      'aca esta tu error',
-    );
+  
     if (this.ClientService && this.NameModifiedEventPublisher) {
       const result = await this.ClientService.UpdateClientName(idclient);
 

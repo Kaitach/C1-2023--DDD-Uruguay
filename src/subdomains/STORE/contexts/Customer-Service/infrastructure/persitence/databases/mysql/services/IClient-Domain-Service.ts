@@ -7,8 +7,10 @@ export class ClientMySqlService implements ClientDomainService<ClientEntityDB> {
 
 constructor(private readonly ClientRepository: ClientRepository){}
 
-    UpdateClientName(data: ClientEntityDB): Promise<ClientEntityDB> {
-    return this.ClientRepository.update(data.ClientID, data)    }
+   async  UpdateClientName(data: ClientEntityDB): Promise<ClientEntityDB> {
+        console.log(data)
+
+    return await this.ClientRepository.update(data.ClientID, data)    }
 
     async UpdateClientPhone(data: ClientEntityDB): Promise<ClientEntityDB> {
         console.log(data)

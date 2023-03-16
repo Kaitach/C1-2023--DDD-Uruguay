@@ -20,12 +20,12 @@ export class UpdateNameClientCaseUse<
 
     constructor(
         private readonly ClientService: ClientDomainService,
-        private readonly ModifiedClientEventPublisher: NameModifiedEventPublisher,
+        private readonly NameModifiedEventPublisher: NameModifiedEventPublisher,
     ) {
         super();
         this.OrderAgregate = new OrderAgregate({
             ClientService,
-            ModifiedClientEventPublisher,
+            NameModifiedEventPublisher,
         })
     }
 
@@ -48,7 +48,7 @@ export class UpdateNameClientCaseUse<
         command: Command
     ): IClientEntity {
 
-        const  Name = new ClientNameValue(command.newName).value
+        const  Name = new ClientNameValue(command.Name).value
         const ClientID = new IdclientValue(command.ClientID).value
 
         return {
@@ -94,8 +94,8 @@ export class UpdateNameClientCaseUse<
         } = valueObject
 
         return new ClientDomainBase({          
-          Name: Name,
-          ClientID: ClientID
+          Name: Name.valueOf(),
+          ClientID: ClientID.valueOf()
         })
 
     }
@@ -103,7 +103,9 @@ export class UpdateNameClientCaseUse<
     private exectueOrderAggregateRoot(
         entity: ClientDomainBase,
     ): Promise<ClientDomainBase | null> {
-        console.log(this.ClientService)
+        console.log("Exec")
+
+        console.log(this.NameModifiedEventPublisher)
         return this.OrderAgregate.UpdateClientName(entity)
     }
 }

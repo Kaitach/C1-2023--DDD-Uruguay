@@ -21,7 +21,7 @@ import { GetClientCaseUse } from '../../application/use-cases/Order-Use-case/get
 export class ClientController {
   constructor(
     private readonly ClientService: ClientService,
-    private readonly ModifiedClientEventPublisher: INameModifiedEventPublisher,
+    private readonly NameModifiedEventPublisher: INameModifiedEventPublisher,
     private readonly IPhoneModifiedEventPublisher: IPhoneModifiedEventPublisher,
     private readonly AddCustomerEventPublisher: IClientAddEventPublisher,
     private readonly orderService: OrderService,
@@ -34,7 +34,7 @@ export class ClientController {
   updateClientName(@Body() command: IUpdateNameClient) {
     const useCase = new UpdateNameClientCaseUse(
       this.ClientService,
-      this.ModifiedClientEventPublisher,
+      this.NameModifiedEventPublisher,
     );
     console.log(this.ClientService)
     useCase.execute(command);
