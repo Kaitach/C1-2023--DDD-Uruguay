@@ -5,6 +5,7 @@ import { MangaStoreModule } from './subdomains/Store/contexts/Customer-Service/i
 
 @Module({
   imports: [
+     
     MangaStoreModule,
     ConfigModule.forRoot({
       isGlobal: true,

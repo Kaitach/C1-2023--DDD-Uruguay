@@ -2,6 +2,8 @@ import { ClientNameValue, PhoneValue } from "../../value-objects";
 import { IdclientValue } from "../../value-objects/Sale/Bill/idclient-value/idclient-value";
 import { IClientEntity } from "../interfaces/Order/client.interface";
 import { v4 as uuidv4 } from 'uuid';
+
+
 /* The ClientDomainBase class is a base class for the ClientDomain class. It implements the
 IClientEntity interface. It has a constructor that takes an IClientEntity as a parameter. If the
 parameter is not null, it assigns the parameter's properties to the class's properties. If the
