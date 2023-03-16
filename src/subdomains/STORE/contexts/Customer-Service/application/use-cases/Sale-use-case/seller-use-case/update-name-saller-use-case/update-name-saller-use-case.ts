@@ -47,9 +47,12 @@ export class UpdateNameSallerUseCase<
     private createValueObject(
         command: Command
     ): ISellerEntity {
-        const IdSeller =  new IdsellerValue (command.idseller)
-        const Name  = new  NameSellerValue (command.name)
+        const IdSeller =  new IdsellerValue (command.idseller).value
+        const Name  = command.Name
+        console.log(command)
+
         return {
+
             IdSeller,
             Name
         }
@@ -84,18 +87,23 @@ export class UpdateNameSallerUseCase<
         valueObject: SellerDomain
 
     ): SellerDomain {
-       
+        console.log("El nombre es"+valueObject.Name);
         const {
             IdSeller,
             Name
         } = valueObject
-
+        console.log(Name)
         return new SellerDomain({          
-            IdSeller: IdSeller,
+            IdSeller: IdSeller.valueOf(),
             Name: Name
         })
 
     }
+/**
+ * It updates the name of the seller.
+ * @param {SellerDomain} entity - SellerDomain
+ * @returns a promise of type SellerDomain or null.
+ */
 
     private exectueSaleAggregateRoot(
         entity: SellerDomain,

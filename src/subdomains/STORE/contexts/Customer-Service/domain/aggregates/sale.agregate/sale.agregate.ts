@@ -99,7 +99,7 @@ export class SaleAgregate
   }
 
   async UpdateNameSeller(data: SellerDomain): Promise<SellerDomain> {
-    if (this.billservice && this.SellerNameModifiedEventPublisher) {
+    if (this.sellerService && this.SellerNameModifiedEventPublisher) {
       const result = await this.sellerService.UpdateNameSeller(data);
       this.SellerNameModifiedEventPublisher.response = result;
       this.SellerNameModifiedEventPublisher.publish();
