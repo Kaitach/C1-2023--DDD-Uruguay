@@ -6,5 +6,5 @@ export class IupdateMangaPrice implements UpdatePriceManga {
     MangaId: string;
 
     @IsNumber()
-    newPrice: number;
+    Price: number;
 }

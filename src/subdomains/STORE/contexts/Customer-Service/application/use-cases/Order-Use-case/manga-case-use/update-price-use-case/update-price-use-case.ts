@@ -46,8 +46,8 @@ export class UpdatePriceUseCase<
     private createValueObject(
         command: Command
     ): IMangaEntity {
-        const Mangaid =  new IdmangaValue(command.MangaId)
-        const  Price  = new   PriceValue (command.newPrice)
+        const Mangaid =  new IdmangaValue(command.MangaId).value
+        const  Price  = new   PriceValue (command.Price).value
         return {
             Mangaid,
             Price
@@ -90,8 +90,8 @@ export class UpdatePriceUseCase<
         } = valueObject
 
         return new MangaDomainBase({          
-            Price: Price,
-            Mangaid: Mangaid
+            Price: Price.valueOf(),
+            Mangaid: Mangaid.valueOf()
         })
 
     }
