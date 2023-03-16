@@ -38,6 +38,7 @@ export class SellerController {
         this.SaleService,
         this.IAddedSellerEventPublisher,
       );
+      console.log(command)
       useCase.execute(command);
     }
 

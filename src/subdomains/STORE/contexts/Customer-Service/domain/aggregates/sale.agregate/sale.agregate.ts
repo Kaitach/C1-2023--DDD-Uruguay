@@ -158,18 +158,7 @@ export class SaleAgregate
     );
   }
 
-  async GetClient(ClientId: string): Promise<ClientDomainBase> {
-    if (this.billservice && this.ClientObtainedEventPublisher) {
-      const result = await this.saleservice.GetClient(ClientId);
-      this.ClientObtainedEventPublisher.response = result;
-      this.ClientObtainedEventPublisher.publish();
-      return this.ClientObtainedEventPublisher.response;
-    }
-    throw new AggregateRootException(
-      'SaleAgregate "saleservice" y/o "ClientObtainedEventPublisher" no estan definidos',
-    );
-  }
-
+ 
   async GetSalesList(data: string  ): Promise<SaleDomainEntity> {
     if (this.billservice && this.SalesObtainedEventPublisher) {
       const result = await this.saleservice.GetSalesList(data );

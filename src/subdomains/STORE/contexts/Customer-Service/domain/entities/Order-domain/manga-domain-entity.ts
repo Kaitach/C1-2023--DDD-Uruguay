@@ -15,7 +15,6 @@ export class MangaDomainBase implements IMangaEntity {
 
         if(_data?.Mangaid) this.Mangaid = _data.Mangaid
         
-        else this.Mangaid = uuidv4()      
 
         if (_data?.Name) this.Name = _data.Name;
 

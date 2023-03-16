@@ -43,7 +43,7 @@ export class mangaController {
 
   
 
-  @Post()
+  @Put()
   updateMangaStock(@Body() command: IUpdateMangaStockCommand) {
     const useCase = new  UpdateMangaStockCaseUse (this.orderService,  this.ModifiedMangaStockingEventPublisher)
  

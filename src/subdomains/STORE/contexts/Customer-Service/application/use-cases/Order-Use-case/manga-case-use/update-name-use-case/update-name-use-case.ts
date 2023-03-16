@@ -46,8 +46,8 @@ export class UpdateNameUseCase<
     private createValueObject(
         command: Command
     ): IMangaEntity {
-        const Mangaid =  new IdmangaValue(command.MangaId)
-        const  Name  = new  NameMangaValue (command.newName)
+        const Mangaid =  new IdmangaValue(command.MangaId).value
+        const  Name  = new  NameMangaValue (command.newName).value
         return {
             Mangaid,
             Name

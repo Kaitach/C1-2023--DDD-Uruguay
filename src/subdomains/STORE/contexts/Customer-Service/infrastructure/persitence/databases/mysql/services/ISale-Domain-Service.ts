@@ -14,18 +14,17 @@ import { BillEntityDB } from '../entities/Bill-entity';
 
 export class SaleMySqlService
     implements SaleDomainService<saleEntityBd>{
-    constructor(private readonly SaleRepository: SaleRepository, private readonly BillRepository: BillRepository, private readonly ClientRepository: ClientRepository, private readonly SellerRepository: SellerRepository) { }
+    constructor(private readonly SaleRepository: SaleRepository, private readonly BillRepository: BillRepository, private readonly SellerRepository: SellerRepository) { }
 
     RegisterSale(data: saleEntityBd): Promise<saleEntityBd> {
         return this.SaleRepository.create(data)
     }
-    async GetClient(data: string): Promise<ClientEntityDB> {
-        return this.ClientRepository.findById(data)
-    }
+  
     GetSalesList(data: string): Promise<saleEntityBd> {
         return this.SaleRepository.findById(data)
     }
     AddSeller(data: SellerEntityDB): Promise<SellerEntityDB> {
+        console.log("aca esta todo bien")
         return this.SellerRepository.create(data)
     }
     UpdateSeller(data: SellerEntityDB): Promise<SellerEntityDB> {
