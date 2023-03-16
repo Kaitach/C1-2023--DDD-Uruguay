@@ -42,7 +42,6 @@ export class mangaController {
   }
 
   
-
   @Put()
   updateMangaStock(@Body() command: IUpdateMangaStockCommand) {
     const useCase = new  UpdateMangaStockCaseUse (this.orderService,  this.ModifiedMangaStockingEventPublisher)
@@ -50,7 +49,6 @@ export class mangaController {
     return useCase.execute(command)
     
   }
-
 
 
   @Put('UpdateMangaName')

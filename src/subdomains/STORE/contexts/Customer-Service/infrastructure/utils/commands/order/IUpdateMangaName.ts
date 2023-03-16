@@ -5,5 +5,5 @@ export class IUpdateMangaName implements UpdateNameManga {
     @IsUUID()
     MangaId: string;
     @IsString()
-    newName: string;
+    Name: string;
 }

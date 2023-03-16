@@ -1,4 +1,4 @@
 export interface UpdateNameManga {
     MangaId: string
-    newName: string
+    Name: string
 }

@@ -51,7 +51,7 @@ export class SaleController {
     }
 
     @Put('updateSellerName')
-  updateMangaStock(@Body() command: IUpdateNameSeller) {
+  updateSellerName(@Body() command: IUpdateNameSeller) {
     const useCase = new  UpdateNameSallerUseCase (this.SellerService,  this.IAddedSellerEventPublisher)
     return useCase.execute(command)
     
