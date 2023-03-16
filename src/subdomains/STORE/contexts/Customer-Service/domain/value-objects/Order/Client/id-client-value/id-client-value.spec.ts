@@ -2,13 +2,18 @@ import { IdClientValueObject } from './';
 
 describe("validate Id", () => {
 
-  it("should add an error if the value is invalid", () => {
-    const value = "invalid-value";
+  it("Validando client UUID", () => {
+    const value = "validando uuid";
     const mangaId = new IdClientValueObject(value);
   
     mangaId.validateData();
   
     expect(mangaId.hasErrors()).toBeFalsy();
+    const errors = mangaId.getErrors();
+    if (errors.length > 0) {
+      expect(errors[0].field).toEqual('UsuarioId');
+      expect(errors[0].message).toBe('El id no contiene una estructura valida ');
+    }   
     
    
   });
@@ -19,7 +24,8 @@ describe("validate Id", () => {
     seller.validateData();
   
     expect(seller.hasErrors()).toBeTruthy();
-   
+    expect(seller.getErrors()[0].field).toBe('UsuarioId')
+    expect(seller.getErrors()[0].message).toBe('El id no contiene una estructura valida ')
   });
   
   })

@@ -23,6 +23,9 @@ import { OrderRepository } from './repositories/Order-Repository';
 import { SaleRepository } from './repositories/Sale-Repository';
 import { BillRepository } from './repositories/Bill-repository';
 import { SellerRepository } from './repositories/Seller-repository';
+import { EventMySqlEntity } from './entities/event.entity';
+import { EventRepository } from './repositories';
+import { EventMySqlService } from './services/event.service';
 
 @Module({
   imports: [
@@ -35,13 +38,14 @@ import { SellerRepository } from './repositories/Seller-repository';
       OrderEntityDb,
       saleEntityBd,
       SellerEntityDB,
-      BillEntityDB
+      BillEntityDB,
+      EventMySqlEntity
 
     ]),
   ],
   controllers: [],
   providers: [
-   
+    EventRepository,
     ClientRepository,
     MangaRepository,   
     OrderRepository,
@@ -49,7 +53,7 @@ import { SellerRepository } from './repositories/Seller-repository';
     BillRepository,
     SellerRepository,
 
-
+    EventMySqlService,
     MangaMySqlService,  
     TypeOrmMysqlConfigService,
     ClientMySqlService,
@@ -66,8 +70,9 @@ import { SellerRepository } from './repositories/Seller-repository';
     SaleRepository,
     BillRepository,
     SellerRepository,
+    EventRepository,
 
-
+    EventMySqlService,
     MangaMySqlService,
     TypeOrmMysqlConfigService,
     ClientMySqlService,

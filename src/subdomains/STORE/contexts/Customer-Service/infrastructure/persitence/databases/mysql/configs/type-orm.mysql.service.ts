@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { ClientEntityDB, OrderEntityDb, MangaEntityDb, BillEntityDB, saleEntityBd, SellerEntityDB } from "../entities";
+import { EventMySqlEntity } from '../entities/event.entity';
 
 
 @Injectable()
@@ -21,7 +22,7 @@ export class TypeOrmMysqlConfigService implements TypeOrmOptionsFactory {
             password:  '1234',
             database:  'basededatostiendamanga',
             entities: [
-                BillEntityDB,ClientEntityDB,saleEntityBd,OrderEntityDb,SellerEntityDB,MangaEntityDb
+                BillEntityDB,ClientEntityDB,saleEntityBd,OrderEntityDb,SellerEntityDB,MangaEntityDb,EventMySqlEntity
             ],
             synchronize: true,
         }

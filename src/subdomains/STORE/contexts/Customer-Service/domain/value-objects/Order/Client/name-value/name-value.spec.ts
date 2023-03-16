@@ -1,7 +1,7 @@
 
-import { ClientNameValue } from "../name-value";
+import { ClientNameValue } from "./";
 
-  describe("Name Client", () => {
+  describe("Nombre correcto", () => {
     it("test name" , () => {
 
       const value = "Franco Torres";
@@ -11,10 +11,16 @@ import { ClientNameValue } from "../name-value";
       NameClient.validateData();
 
       expect(NameClient.hasErrors()).toBeTruthy();
+      const errors = NameClient.getErrors();
 
+      if (errors.length > 0) {
+        expect(errors[0].field).toEqual('Name');
+        expect(errors[0].message).toBe('El dato ingresado en "name"  contiene una estructura valida ');
+            }
+         
     });
 
-    it("prueba name con numeros " , () => {
+    it("prueba nombre con numeros " , () => {
 
         const value = "Fr4nc0 Torres";
   
@@ -23,10 +29,15 @@ import { ClientNameValue } from "../name-value";
         NameClient.validateData();
   
         expect(NameClient.hasErrors()).toBeFalsy()
+        const errors = NameClient.getErrors();
+        if (errors.length > 0) {
+          expect(errors[0].field).toEqual('Name');
+          expect(errors[0].message).toBe('El dato ingresado en "name" no contiene una estructura valida ');
+              }
         
       });
 
-      it("prueba con espacios " , () => {
+      it("prueba nombre  con espacios " , () => {
 
         const value = "F R A N C O ";
   
@@ -35,6 +46,11 @@ import { ClientNameValue } from "../name-value";
         NameClient.validateData();
   
         expect(NameClient.hasErrors()).toBeFalsy();
-      
+        const errors = NameClient.getErrors();
+
+        if (errors.length > 0) {
+          expect(errors[0].field).toEqual('Name');
+          expect(errors[0].message).toBe('El dato ingresado en "name" no contiene una estructura valida ');
+              }    
       });
   });

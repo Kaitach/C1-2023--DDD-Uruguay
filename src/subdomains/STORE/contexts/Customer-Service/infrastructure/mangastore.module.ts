@@ -11,11 +11,12 @@ import { SaleController } from './controllers/Sale-Controller';
 import { ClientController } from './controllers/Client-controller';
 import { SellerController } from './controllers/Seller-controller';
 import { mangaController } from './controllers/Manga-controller';
+import { subscriberGeneric } from './messaging/subscriber/subscriber-generic';
 
 @Module({
     imports: [PersistenceModuleModule, MessagingModule,
 ],
-    controllers: [OrderController, SaleController, BillControllerController,ClientController,SellerController,mangaController],
+    controllers: [OrderController, SaleController, BillControllerController,ClientController,SellerController,mangaController,subscriberGeneric],
     providers: [],
     exports:[]
 })

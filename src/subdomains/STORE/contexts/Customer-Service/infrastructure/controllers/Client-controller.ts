@@ -42,7 +42,7 @@ export class ClientController {
 
   @Put('update-client-phone')
   updateClientPhone(@Body() command: IupdatePhoneClient) {
-    console.log(this.ClientService)
+    
 
     const useCase = new UpdatePhoneClientCaseUse(
       this.ClientService,
