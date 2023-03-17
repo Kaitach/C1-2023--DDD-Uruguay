@@ -14,7 +14,9 @@ import { IaddClientCOmmand } from '../utils/commands/order/IaddClientCOmmand';
 import { OrderService } from '../persitence';
 import { IGetClientCommand } from '../utils/commands/order/IGet-Client-Command';
 import { GetClientCaseUse } from '../../application/use-cases/Order-Use-case/get-client-case-use/get-client-case-use';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Client')
 @Controller('Client')
 export class ClientController {
   constructor(
@@ -28,6 +30,7 @@ export class ClientController {
 
   ) {}
 
+  @ApiOperation ({summary: "update  name"})
   @Put('update-client-name')
   updateClientName(@Body() command: IUpdateNameClient) {
     const useCase = new UpdateNameClientCaseUse(
@@ -37,6 +40,8 @@ export class ClientController {
     console.log(this.ClientService)
     useCase.execute(command);
   }
+
+  @ApiOperation({summary: "update  phone"})
 
   @Put('update-client-phone')
   updateClientPhone(@Body() command: IupdatePhoneClient) {
@@ -49,6 +54,7 @@ export class ClientController {
     useCase.execute(command);
   }
 
+  @ApiOperation({summary: "create customer"})
 
   @Post('create-Customer')
   createCustomer(@Body() command: IaddClientCOmmand) {
@@ -59,6 +65,7 @@ export class ClientController {
     return useCase.execute(command);
   }
 
+  @ApiOperation({summary: "Get id"})
 
   @Get(':id')
   getClient(@Param('id') id: string ) {
@@ -68,3 +75,6 @@ export class ClientController {
     return useCase.execute(command);
   }
 }
+
+
+

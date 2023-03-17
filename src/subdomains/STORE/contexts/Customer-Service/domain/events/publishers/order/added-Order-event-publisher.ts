@@ -1,3 +1,4 @@
+/* The above code is a publisher class that is used to publish an event. */
 import { EventPublisherBase } from "src/libs";
 import { OrderDomainEntityBase } from "../../../entities/Order-domain/Order-domain-entity";
 /**

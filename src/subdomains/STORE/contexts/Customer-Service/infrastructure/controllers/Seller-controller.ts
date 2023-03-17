@@ -7,7 +7,9 @@ import { IUpdateNameSellerName } from '../utils/commands/sale/IUpdateName';
 import { IGetSeller } from '../utils/commands/sale/IGetSeller';
 import { ISellerObtainedEventPublisher } from '../messaging/publisher/Sale/Seller/ISellerObtainedEventPublisher';
 import { IAddsallerCommand } from '../utils/commands/sale/IAddsaller';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Seller')
 
 @Controller('Seller')
 export class SellerController {
@@ -25,7 +27,7 @@ export class SellerController {
       ) {}
 
       
-   
+   @ApiOperation({summary: "get id"})
     @Get(':id')
     getSale(@Param('id') id: string) {
       const command =  new IGetSeller
@@ -34,7 +36,7 @@ export class SellerController {
       return useCase.execute(command)
       
     }
-
+    @ApiOperation({summary: "create seller"})
     @Post()
     async createSeller(@Body() command: IAddsallerCommand) {
       const useCase = new AddSallerUseCase(

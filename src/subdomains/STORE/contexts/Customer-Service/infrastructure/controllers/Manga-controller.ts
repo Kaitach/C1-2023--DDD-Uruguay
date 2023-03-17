@@ -2,6 +2,7 @@
 
 
 import { Controller, Body, Get, Put, Param } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {  GetMangaCaseUse, UpdateMangaStockCaseUse, UpdateNameUseCase, UpdatePriceUseCase, UpdateStateUseCase } from '../../application';
 import {
     IMangaModifiedEventPublisher,
@@ -15,6 +16,7 @@ import { IupdateMangaPrice } from '../utils/commands/order/IupdateMangaPrice';
 import { IUpdateMangaStockCommand } from '../utils/commands/order/IUpdateMangaStock';
 import { IUpdateStateManga } from '../utils/commands/order/IUpdateStateManga';
 
+@ApiTags('manga')
 @Controller('manga')
 export class mangaController {
   constructor(
@@ -30,6 +32,7 @@ export class mangaController {
   ) {}
 
 
+  @ApiOperation({summary: "Get id"})
 
   @Get(":id")
   getManga( @Param('id') id: string ) {
@@ -40,7 +43,8 @@ export class mangaController {
     
   }
 
-  
+  @ApiOperation({summary: "update stock"})
+
   @Put()
   updateMangaStock(@Body() command: IUpdateMangaStockCommand) {
     const useCase = new  UpdateMangaStockCaseUse (this.orderService,  this.ModifiedMangaStockingEventPublisher)
@@ -49,6 +53,7 @@ export class mangaController {
     
   }
 
+  @ApiOperation({summary: "update  name"})
 
   @Put('UpdateMangaName')
   updateMangaName(@Body() command: IUpdateMangaName) {

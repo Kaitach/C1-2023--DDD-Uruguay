@@ -5,7 +5,9 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+
+   app.listen(3000);
+  
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.KAFKA,
     options: {
@@ -17,16 +19,18 @@ async function bootstrap() {
       }
     },
   });
-  app.startAllMicroservices(); 
 
   const options = new DocumentBuilder()
-  .setTitle('Mi API')
-  .setDescription('Descripción de mi API')
+  .setTitle('Manga Store')
+  .setDescription('Documentacion de la manga store')
   .setVersion('1.0')
-  .addTag('etiqueta')
+  .addTag('Manga Store')
   .build();
+const document = SwaggerModule.createDocument(app, options);
 
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+SwaggerModule.setup('docs', app, document);
+
+  app.startAllMicroservices(); 
+
 }
 bootstrap();
