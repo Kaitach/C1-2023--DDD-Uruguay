@@ -24,7 +24,7 @@ export class ClientNameValue extends ValueObjectBase<string>{
 
 private validateStructure(): void {
   
-    if(this.value && !isString(this.value) === false)
+    if(this.value && isString(this.value) === false)
 {
     const error = {
       field: 'Name',

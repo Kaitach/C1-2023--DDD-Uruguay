@@ -12,14 +12,14 @@ export class IRegisterOrderCommand implements IRegisterOrder {
     clientID: string;
       @ApiProperty({
         example: 'e3fda83e-aa89-4f12-9bb0-63f0cde54d92',
-        description: 'El ID del cliente a registrar',
+        description: 'El ID del MangaID a registrar',
       })
 
     @IsUUID()
     MangaID: string;
   @ApiProperty({
         example: 'e3fda83e-aa89-4f12-9bb0-63f0cde54d92',
-        description: 'El ID del manga a registrar',
+        description: 'El ID de la orden a registrar',
       })
     @IsUUID()
     idOrder: string;

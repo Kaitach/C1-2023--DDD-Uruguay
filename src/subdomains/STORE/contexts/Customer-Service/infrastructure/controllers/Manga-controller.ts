@@ -31,6 +31,7 @@ export class mangaController {
 
   ) {}
 
+/* A controller that is using a use case to get a manga. */
 
   @ApiOperation({summary: "Get id"})
 
@@ -43,6 +44,7 @@ export class mangaController {
     
   }
 
+/* A decorator that is used to describe the operation of the method. */
   @ApiOperation({summary: "update stock"})
 
   @Put()

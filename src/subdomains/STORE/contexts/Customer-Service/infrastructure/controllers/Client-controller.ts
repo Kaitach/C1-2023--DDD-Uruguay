@@ -30,6 +30,7 @@ export class ClientController {
 
   ) {}
 
+/* The above code is a controller that is used to handle the requests that are sent to the server. */
   @ApiOperation ({summary: "update  name"})
   @Put('update-client-name')
   updateClientName(@Body() command: IUpdateNameClient) {
@@ -41,6 +42,7 @@ export class ClientController {
     useCase.execute(command);
   }
 
+ /* This is a controller that is used to handle the requests that are sent to the server. */
   @ApiOperation({summary: "update  phone"})
 
   @Put('update-client-phone')
@@ -53,6 +55,7 @@ export class ClientController {
     );
     useCase.execute(command);
   }
+/* This is a controller that is used to handle the requests that are sent to the server. */
 
   @ApiOperation({summary: "create customer"})
 
@@ -65,6 +68,7 @@ export class ClientController {
     return useCase.execute(command);
   }
 
+ /* This is a controller that is used to handle the requests that are sent to the server. */
   @ApiOperation({summary: "Get id"})
 
   @Get(':id')

@@ -18,9 +18,9 @@ import {  MangaDomainBase } from '.';
 
     });
 
-    it('debería establecer la propiedad Mangaid no existe', () => {
+    it('debería establecer la propiedad price no existe', () => {
       const mangaDomainBase = new MangaDomainBase();
 
-      expect(mangaDomainBase.Mangaid).not.toBeDefined();
+      expect(mangaDomainBase.Price).not.toBeDefined();
     });
   });

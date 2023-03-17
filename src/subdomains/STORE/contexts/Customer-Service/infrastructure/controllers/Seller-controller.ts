@@ -29,7 +29,7 @@ export class SellerController {
       
    @ApiOperation({summary: "get id"})
     @Get(':id')
-    getSale(@Param('id') id: string) {
+    getSeller(@Param('id') id: string) {
       const command =  new IGetSeller
       command.SellerId = id;
       const useCase = new  GetSellerUseCase (this.SaleService,  this.ISellerObtainedEventPublisher)

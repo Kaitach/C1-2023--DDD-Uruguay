@@ -26,7 +26,7 @@ export class IdClientValueObject extends ValueObjectBase<string>{
  */
 private validateStructure(): void {
   
-    if(this.value && !IsUuid(this.value) === false)
+    if(this.value && IsUuid(this.value) === false)
 {
     const error = {
       field: 'UsuarioId',

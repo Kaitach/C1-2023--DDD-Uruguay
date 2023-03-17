@@ -49,9 +49,9 @@ export class AddCustomerCaseUse<
         command: Command
     ): IClientEntity {
 
-        const ClientID = new IdclientValue(command.ClientID).value
-        const  Name = new ClientNameValue(command.Name).value
-        const  Phone = new PhoneValue(command.Phone).value
+        const ClientID = new IdclientValue(command.ClientID)
+        const  Name = new ClientNameValue(command.Name)
+        const  Phone = new PhoneValue(command.Phone)
 
         return {
            
@@ -69,10 +69,7 @@ export class AddCustomerCaseUse<
             Name,
             Phone
         } = valueObject
-      
-
-        if (Phone instanceof PhoneValue && Phone.hasErrors())
-            this.setErrors(Phone.getErrors());    
+         
 
         if (Name instanceof ClientNameValue && Name.hasErrors())
             this.setErrors(Name.getErrors());

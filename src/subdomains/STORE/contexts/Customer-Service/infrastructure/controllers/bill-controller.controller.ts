@@ -26,6 +26,7 @@ export class BillControllerController {
     
       ) {}
 
+/* A controller that is using the Get method to get the id of the bill. */
 
     @ApiOperation({summary: "Get id"})
     @Get(':id')
@@ -37,7 +38,9 @@ export class BillControllerController {
       return useCase.execute(command)
       
     }
+/* A method that is using the Put method to update the total of the bill. */
 
+/* A method that is using the Put method to update the total of the bill. */
     @ApiOperation({summary: "update total"})
 
     @Put('Bill-total')
@@ -49,6 +52,7 @@ export class BillControllerController {
       useCase.execute(command);
     }
   
+/* A method that is using the Put method to update the payment method of the bill. */
     @ApiOperation({summary: "update payment Method"})
 
     @Put('Bill-Payment-Method')

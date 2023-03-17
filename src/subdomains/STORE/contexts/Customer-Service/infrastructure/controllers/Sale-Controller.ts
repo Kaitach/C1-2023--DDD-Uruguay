@@ -8,7 +8,6 @@ import { IRegisterSaleCommand } from "../utils/commands/sale/IRegisterSale";
 import { IAddedSellerEventPublisher } from '../messaging/publisher/Sale/added-seller-messaging-publisher';
 import { ISellerObtainedEventPublisher } from "../messaging/publisher/Sale/Seller/ISellerObtainedEventPublisher";
 import { IBillObtainedEventPublisher } from '../messaging/publisher/Sale/IBillObtainedEventPublisher';
-import { BillObtainedEventPublisher } from '../../domain/events/publishers/Sale/Bill/bill-obtained.publish-event';
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Sale')
@@ -57,5 +56,7 @@ export class SaleController {
     return useCase.execute(command)
     
   }
+
+  
 
 }

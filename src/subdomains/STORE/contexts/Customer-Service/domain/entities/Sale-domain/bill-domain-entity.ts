@@ -9,6 +9,7 @@ import { IBillEntity } from "../interfaces/Sale/bill.interface";
 import { v4 as uuidv4 } from 'uuid';
 import { IdmangaValue } from "../../value-objects";
 
+/* A class that implements the interface IBillEntity. */
 
 export class BillDomain implements IBillEntity{
     IDBill?: string |  IdbillValue;

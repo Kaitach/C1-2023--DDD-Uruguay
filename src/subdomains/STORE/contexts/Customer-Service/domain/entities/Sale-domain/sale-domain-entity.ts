@@ -5,6 +5,7 @@ import { BillDomain } from "./bill-domain-entity";
 import { SellerDomain } from "./seller-domain-entity";
 import { v4 as uuidv4 } from 'uuid';
 
+/* The class is a domain entity that implements the interface ISaleEntity */
 export class SaleDomainEntity implements ISaleEntity{
     Bill?: BillDomain;
     Seller?: SellerDomain;

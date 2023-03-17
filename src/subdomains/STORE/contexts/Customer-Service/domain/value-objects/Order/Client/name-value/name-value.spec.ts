@@ -11,7 +11,7 @@ import { ClientNameValue } from "./";
 
       NameClient.validateData();
 
-      expect(NameClient.hasErrors()).toBeTruthy();
+      expect(NameClient.hasErrors()).toBeFalsy();
       const errors = NameClient.getErrors();
 
       if (errors.length > 0) {
@@ -21,7 +21,6 @@ import { ClientNameValue } from "./";
          
     });
 
-   /* Testing the name with numbers. */
     it("prueba nombre con numeros " , () => {
 
         const value = "Fr4nc0 Torres";
@@ -30,7 +29,7 @@ import { ClientNameValue } from "./";
   
         NameClient.validateData();
   
-        expect(NameClient.hasErrors()).toBeFalsy()
+        expect(NameClient.hasErrors()).toBeTruthy()
         const errors = NameClient.getErrors();
         if (errors.length > 0) {
           expect(errors[0].field).toEqual('Name');
@@ -48,7 +47,7 @@ import { ClientNameValue } from "./";
   
         NameClient.validateData();
   
-        expect(NameClient.hasErrors()).toBeFalsy();
+        expect(NameClient.hasErrors()).toBeTruthy();
         const errors = NameClient.getErrors();
 
         if (errors.length > 0) {

@@ -22,9 +22,8 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
   .setTitle('Manga Store')
-  .setDescription('Documentacion de la manga store')
+  .setDescription('API para una tienda de manga que sigue la estructura DDD. Este sistema tiene un agregado para manga en la orden, así como un agregado para crear clientes. El ID de la orden se pasa al agregado de ventas, que a su vez tiene una factura y un vendedor. La arquitectura del proyecto está diseñada para mantener la limpieza del código.')
   .setVersion('1.0')
-  .addTag('Manga Store')
   .build();
 const document = SwaggerModule.createDocument(app, options);
 
